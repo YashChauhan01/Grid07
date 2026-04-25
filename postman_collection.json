@@ -1,0 +1,154 @@
+{
+    "info": {
+        "name": "Grid07 Assignment",
+        "description": "Postman collection for testing the Grid07 Phase 1-4 endpoints.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1. Create Post",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/posts",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "posts"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"authorId\": 1,\n    \"authorType\": \"USER\",\n    \"content\": \"This is a brand new human post!\"\n}"
+                }
+            }
+        },
+        {
+            "name": "2. Add Human Comment",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/posts/1/comments",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "posts",
+                        "1",
+                        "comments"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"authorId\": 2,\n    \"authorType\": \"USER\",\n    \"content\": \"This is a human reply to the post.\"\n}"
+                }
+            }
+        },
+        {
+            "name": "3. Add Bot Comment",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/posts/1/comments",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "posts",
+                        "1",
+                        "comments"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"authorId\": 99,\n    \"authorType\": \"BOT\",\n    \"content\": \"Hello! I am a bot triggering a notification.\"\n}"
+                }
+            }
+        },
+        {
+            "name": "4. Like Post",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/posts/1/like",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "posts",
+                        "1",
+                        "like"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"userId\": 2\n}"
+                }
+            }
+        },
+        {
+            "name": "5. Add Bot Comment (Expect 429)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "url": {
+                    "raw": "{{baseUrl}}/api/posts/1/comments",
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "path": [
+                        "api",
+                        "posts",
+                        "1",
+                        "comments"
+                    ]
+                },
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"authorId\": 100,\n    \"authorType\": \"BOT\",\n    \"content\": \"Spam bot comment to trigger 429 Too Many Requests!\"\n}"
+                }
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
+}
